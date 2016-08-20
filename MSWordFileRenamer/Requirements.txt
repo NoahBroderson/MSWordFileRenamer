@@ -1,0 +1,7 @@
+﻿1. Select folder to rename
+2. Display list of Word files to be renamed
+3. User clicks button to rename each file (Rename next...)
+2. Display Filename, Size, and Time to rename
+
+3. Optional
+	- Checkbox to close after rename

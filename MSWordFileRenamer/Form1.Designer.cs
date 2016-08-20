@@ -36,6 +36,7 @@
             this.lbFileList = new System.Windows.Forms.ListBox();
             this.lblFilesList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
+            this.btnCleanUp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbRenameResults
@@ -52,7 +53,7 @@
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.Size = new System.Drawing.Size(467, 20);
             this.txtFolderPath.TabIndex = 2;
-            this.txtFolderPath.Text = "\\\\rtints6\\hsdata\\Barcelona\\IT\\Performance Testing\\Automated";
+            this.txtFolderPath.Text = "C:\\RenamerTests\\StaticFiles";
             // 
             // lblFolderPath
             // 
@@ -109,11 +110,22 @@
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
+            // btnCleanUp
+            // 
+            this.btnCleanUp.Location = new System.Drawing.Point(276, 134);
+            this.btnCleanUp.Name = "btnCleanUp";
+            this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
+            this.btnCleanUp.TabIndex = 9;
+            this.btnCleanUp.Text = "Clean Up";
+            this.btnCleanUp.UseVisualStyleBackColor = true;
+            this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 445);
+            this.Controls.Add(this.btnCleanUp);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lblFilesList);
             this.Controls.Add(this.lbFileList);
@@ -123,7 +135,7 @@
             this.Controls.Add(this.txtFolderPath);
             this.Controls.Add(this.lbRenameResults);
             this.Name = "frmMain";
-            this.Text = "Main";
+            this.Text = "a";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,6 +151,7 @@
         private System.Windows.Forms.ListBox lbFileList;
         private System.Windows.Forms.Label lblFilesList;
         private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnCleanUp;
     }
 }
 

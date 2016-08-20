@@ -24,19 +24,26 @@ namespace MSWordFileRenamer
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            string renameResult = "";
-            for (int i = 0; i < lbFileList.Items.Count; i++)
-            {
-                string fileToRename = lbFileList.Items[0].ToString();
-                renameResult = FileRenamer.GetRenameResults(fileToRename);
-                lbFileList.Items.Remove(fileToRename); // (lbFileList.SelectedItem);
-                DisplayResult(renameResult);
-            }
-            
+            //Single file renaming
+            //string renameResult = "";
+            //for (int i = 0; i < lbFileList.Items.Count; i++)
+            //{
+            //    string fileToRename = lbFileList.Items[0].ToString();
+            //    renameResult = FileRenamer.GetRenameResults(fileToRename);
+            //    lbFileList.Items.Remove(fileToRename); // (lbFileList.SelectedItem);
+            //    DisplayResult(renameResult);
+            //}
+
             //string fileToRename = lbFileList.SelectedItem.ToString();
             //string renameResult = FileRenamer.GetRenameResults(fileToRename);
             //lbFileList.Items.Remove(lbFileList.SelectedItem);
             //DisplayResult(renameResult);
+
+
+            var _renameResults = FileRenamer.GetRenameResults(filesToRename);
+            DisplayResults(_renameResults);
+
+
         }
 
         public void DisplayResult(string renameResult)
@@ -54,17 +61,33 @@ namespace MSWordFileRenamer
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            string folderToProcess = txtFolderPath.Text;
-            filesToRename = FileRenamer.GetFileList(folderToProcess);
-            DisplayFiles(filesToRename);
+            
+            DisplaySourceFolderFiles();
         }
 
-        private void DisplayFiles(List<string> filesToRename)
+        private void DisplaySourceFolderFiles()
         {
+            lbFileList.Items.Clear();
+            lbRenameResults.Items.Clear();
+            string folderToProcess = txtFolderPath.Text;
+            filesToRename = FileRenamer.GetFileList(folderToProcess);
             foreach (string name in filesToRename)
             {
                 lbFileList.Items.Add(name);
             }
+        }
+
+        private void btnCleanUp_Click(object sender, EventArgs e)
+        {
+            foreach (string file in lbFileList.Items)
+            {
+               if (file.IndexOf("_z") != -1)
+                {
+                    System.IO.File.Delete(file);
+                }
+            }
+
+            DisplaySourceFolderFiles();
         }
     }
 }

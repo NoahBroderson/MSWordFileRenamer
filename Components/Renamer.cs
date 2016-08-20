@@ -16,6 +16,8 @@ namespace MSWordFileRenamer
 
         public List<string> GetRenameResults(List<string> filesToRename)
         {
+            List<string> SavedAsFiles = new List<string>();
+
             Application Word = new Application();
             Word.Visible = true;
 
@@ -28,13 +30,15 @@ namespace MSWordFileRenamer
             foreach (string file in filesToRename)
             {
                 Document CurrentDocument = Word.Documents[file];
-                CurrentDocument.SaveAsQuickStyleSet(file.Replace(".","_z."));                
-                CurrentDocument.Close(false);
+                string SavedAsName = file.Replace(".", "_z.");
+                CurrentDocument.SaveAs(SavedAsName);
+                SavedAsFiles.Add(SavedAsName);
+                //CurrentDocument.Close(false);
             }
             
-            Word.Quit();
+            //Word.Quit();
 
-            return filesToRename;
+            return SavedAsFiles;
         }
 
         public List<string> GetFileList(string folderToProcess)

@@ -5,3 +5,8 @@
 
 3. Optional
 	- Checkbox to close after rename
+
+
+	todo - 
+	Open all files first
+	Rename all files

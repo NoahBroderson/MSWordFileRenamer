@@ -21,7 +21,6 @@ namespace RenamerTest
             //assert
             int fileCount = 4;
             Assert.AreEqual(fileCount, FileList.Count);
-        
         }
     }
 }

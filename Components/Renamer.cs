@@ -42,7 +42,6 @@ namespace MSWordFileRenamer
 
                     throw error;
                 }
-                
             }
             
             return SavedAsFiles;

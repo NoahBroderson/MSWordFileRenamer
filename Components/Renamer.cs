@@ -29,11 +29,20 @@ namespace MSWordFileRenamer
 
             foreach (string file in filesToRename)
             {
-                Document CurrentDocument = Word.Documents[file];
-                string SavedAsName = file.Replace(".", "_z.");
-                CurrentDocument.SaveAs(SavedAsName);
-                SavedAsFiles.Add(SavedAsName);
-                //CurrentDocument.Close(false);
+                try
+                {
+                    Document CurrentDocument = Word.Documents[file];
+                    string SavedAsName = file.Replace(".", "_z.");
+                    CurrentDocument.SaveAs(SavedAsName);
+                    SavedAsFiles.Add(SavedAsName);
+                    //CurrentDocument.Close(false);
+                }
+                catch (Exception error)
+                {
+
+                    throw error;
+                }
+                
             }
             
             //Word.Quit();

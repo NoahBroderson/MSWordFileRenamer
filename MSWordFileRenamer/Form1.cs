@@ -30,7 +30,6 @@ namespace MSWordFileRenamer
             DisplaySourceFolderFiles();
         }
 
-
         private void DisplaySourceFolderFiles()
         {
             lbFileList.Items.Clear();
@@ -42,7 +41,6 @@ namespace MSWordFileRenamer
                 lbFileList.Items.Add(name);
             }
         }
-
 
         private void btnRename_Click(object sender, EventArgs e)
         {
@@ -65,7 +63,6 @@ namespace MSWordFileRenamer
             DisplayResults(_renameResults);
         }
 
-
         public void DisplayResult(string renameResult)
         {
             lbRenameResults.Items.Add(renameResult);
@@ -79,7 +76,6 @@ namespace MSWordFileRenamer
                 lbRenameResults.Items.Add(result);
             }
         }
-
 
         private void btnCleanUp_Click(object sender, EventArgs e)
         {

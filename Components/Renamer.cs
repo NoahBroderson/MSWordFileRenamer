@@ -36,8 +36,6 @@ namespace MSWordFileRenamer
                 //CurrentDocument.Close(false);
             }
             
-            //Word.Quit();
-
             return SavedAsFiles;
         }
 

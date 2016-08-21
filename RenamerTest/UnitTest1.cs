@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace RenamerTest
 {
     [TestClass]
-    public class UnitTest1
+    public class RenamerTests
     {
         [TestMethod]
         public void GetFileList()
@@ -21,6 +21,36 @@ namespace RenamerTest
             //assert
             int fileCount = 4;
             Assert.AreEqual(fileCount, FileList.Count);
+        }
+    }
+
+    [TestClass]
+    public class WordFileTests
+    {
+        [TestMethod]
+        public void WordFileDisplayName()
+        {
+            //setup
+            MSWordFileRenamer.WordFile wordFile = new MSWordFileRenamer.WordFile("C:\\RenamerTests\\StaticFiles\\temp1.doc");
+
+            //action
+
+            //assert
+            Assert.AreEqual(wordFile.ToString(), "temp1.doc");
+        }
+
+        [TestMethod]
+        public void WordFileFullName()
+        {
+            {
+                //setup
+                MSWordFileRenamer.WordFile wordFile = new MSWordFileRenamer.WordFile("C:\\RenamerTests\\StaticFiles\\temp1.doc");
+
+                //action
+
+                //assert
+                Assert.AreEqual(wordFile.FullFileName, "C:\\RenamerTests\\StaticFiles\\temp1.doc");
+            }
         }
     }
 }

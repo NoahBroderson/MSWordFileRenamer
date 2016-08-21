@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace MSWordFileRenamer
 {
+
     public class Renamer
     {
         public  string GetRenameResults(string fileToRename)

@@ -16,11 +16,33 @@ namespace MSWordFileRenamer
         Renamer FileRenamer = new Renamer();
         List<string> filesToRename = null;
 
+
         public frmMain()
         {
             InitializeComponent();
             Renamer FileRenamer = new Renamer();
         }
+
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            
+            DisplaySourceFolderFiles();
+        }
+
+
+        private void DisplaySourceFolderFiles()
+        {
+            lbFileList.Items.Clear();
+            lbRenameResults.Items.Clear();
+            string folderToProcess = txtFolderPath.Text;
+            filesToRename = FileRenamer.GetFileList(folderToProcess);
+            foreach (string name in filesToRename)
+            {
+                lbFileList.Items.Add(name);
+            }
+        }
+
 
         private void btnRename_Click(object sender, EventArgs e)
         {
@@ -39,17 +61,16 @@ namespace MSWordFileRenamer
             //lbFileList.Items.Remove(lbFileList.SelectedItem);
             //DisplayResult(renameResult);
 
-
             var _renameResults = FileRenamer.GetRenameResults(filesToRename);
             DisplayResults(_renameResults);
-
-
         }
+
 
         public void DisplayResult(string renameResult)
         {
             lbRenameResults.Items.Add(renameResult);
         }
+
 
         public void DisplayResults(List<string> renameResults)
         {
@@ -59,23 +80,6 @@ namespace MSWordFileRenamer
             }
         }
 
-        private void btnSelect_Click(object sender, EventArgs e)
-        {
-            
-            DisplaySourceFolderFiles();
-        }
-
-        private void DisplaySourceFolderFiles()
-        {
-            lbFileList.Items.Clear();
-            lbRenameResults.Items.Clear();
-            string folderToProcess = txtFolderPath.Text;
-            filesToRename = FileRenamer.GetFileList(folderToProcess);
-            foreach (string name in filesToRename)
-            {
-                lbFileList.Items.Add(name);
-            }
-        }
 
         private void btnCleanUp_Click(object sender, EventArgs e)
         {

@@ -85,11 +85,17 @@ namespace MSWordFileRenamer
 
         public void CloseWordDocs(List<WordFile> renamedFiles)
         {
-            foreach (WordFile fileToClose in renamedFiles)
+            try
             {
-                Word.Documents[fileToClose.FullFileName].Close();
+                foreach (WordFile fileToClose in renamedFiles)
+                {
+                    Word.Documents[fileToClose.FullFileName].Close();
+                }
+                Word.Quit();
             }
-            Word.Quit();
+            catch (Exception error)
+            {
+            }
         }
     }
 }

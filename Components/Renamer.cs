@@ -74,12 +74,19 @@ namespace MSWordFileRenamer
 
         public void CleanupFolder(List<WordFile> fileList)
         {
-            foreach (WordFile file in fileList)
+            try
             {
-                if (file.FullFileName.IndexOf("_z") != -1)
+                foreach (WordFile file in fileList)
                 {
-                    System.IO.File.Delete(file.FullFileName);
+                    if (file.FullFileName.IndexOf("_z") != -1)
+                    {
+                        System.IO.File.Delete(file.FullFileName);
+                    }
                 }
+            }
+            catch (Exception error)
+            {
+                
             }
         }
 

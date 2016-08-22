@@ -52,12 +52,15 @@ namespace MSWordFileRenamer
             {
                 try
                 {
-                    List<string> fileList = new List<string>(Directory.GetFiles(folderToProcess));
+                    List<string> fileList = new List<string>(Directory.GetFiles(folderToProcess,"*.doc"));
                     var WordFileList = new List<WordFile>();
 
                     foreach (var file in fileList)
                     {
+                        if (!file.ToString().Contains("~"))
+                        {
                         WordFileList.Add(new WordFile(file));
+                        }
                     }
                     return WordFileList;
                 }

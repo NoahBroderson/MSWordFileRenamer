@@ -14,8 +14,8 @@ namespace MSWordFileRenamer
     public partial class frmMain : Form
     {
         Renamer FileRenamer = new Renamer();
-        List<string> filesToRename = null;
-
+        List<WordFile> filesToRename = null;
+        List<WordFile> renamedFiles = null;
 
         public frmMain()
         {
@@ -26,17 +26,24 @@ namespace MSWordFileRenamer
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            folderBrowser.SelectedPath = txtFolderPath.Text;
+            DialogResult result = folderBrowser.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+            {
+                txtFolderPath.Text = folderBrowser.SelectedPath;
+            }
+
             DisplaySourceFolderFiles();
         }
 
         private void DisplaySourceFolderFiles()
         {
             lbFileList.Items.Clear();
-            lbRenameResults.Items.Clear();
             string folderToProcess = txtFolderPath.Text;
             filesToRename = FileRenamer.GetFileList(folderToProcess);
-            foreach (string name in filesToRename)
+            foreach (WordFile name in filesToRename)
             {
                 lbFileList.Items.Add(name);
             }
@@ -44,23 +51,10 @@ namespace MSWordFileRenamer
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            //Single file renaming
-            //string renameResult = "";
-            //for (int i = 0; i < lbFileList.Items.Count; i++)
-            //{
-            //    string fileToRename = lbFileList.Items[0].ToString();
-            //    renameResult = FileRenamer.GetRenameResults(fileToRename);
-            //    lbFileList.Items.Remove(fileToRename); // (lbFileList.SelectedItem);
-            //    DisplayResult(renameResult);
-            //}
-
-            //string fileToRename = lbFileList.SelectedItem.ToString();
-            //string renameResult = FileRenamer.GetRenameResults(fileToRename);
-            //lbFileList.Items.Remove(lbFileList.SelectedItem);
-            //DisplayResult(renameResult);
-
-            var _renameResults = FileRenamer.GetRenameResults(filesToRename);
-            DisplayResults(_renameResults);
+            renamedFiles = FileRenamer.GetRenameResults(filesToRename);
+            DisplayRenamedFiles(renamedFiles);
+            DisplaySourceFolderFiles();
+            
         }
 
         public void DisplayResult(string renameResult)
@@ -69,9 +63,9 @@ namespace MSWordFileRenamer
         }
 
 
-        public void DisplayResults(List<string> renameResults)
+        public void DisplayRenamedFiles(List<WordFile> renameResults)
         {
-            foreach (string result in renameResults)
+            foreach (WordFile result in renameResults)
             {
                 lbRenameResults.Items.Add(result);
             }
@@ -79,15 +73,18 @@ namespace MSWordFileRenamer
 
         private void btnCleanUp_Click(object sender, EventArgs e)
         {
-            foreach (string file in lbFileList.Items)
-            {
-               if (file.IndexOf("_z") != -1)
-                {
-                    System.IO.File.Delete(file);
-                }
-            }
-
+            var FilesToCleanup = FileRenamer.GetFileList(txtFolderPath.Text);
+            FileRenamer.CleanupFolder(filesToRename);
             DisplaySourceFolderFiles();
+        }
+
+        private void btnCloseAll_Click(object sender, EventArgs e)
+        {
+            FileRenamer.CloseWordDocs(renamedFiles);
+            FileRenamer.CleanupFolder(renamedFiles);
+            DisplaySourceFolderFiles();
+            renamedFiles.Clear();
+            lbRenameResults.Items.Clear();
         }
     }
 }

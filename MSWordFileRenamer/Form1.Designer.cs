@@ -37,6 +37,7 @@
             this.lblFilesList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnCleanUp = new System.Windows.Forms.Button();
+            this.btnCloseAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbRenameResults
@@ -45,7 +46,8 @@
             this.lbRenameResults.Location = new System.Drawing.Point(381, 94);
             this.lbRenameResults.Name = "lbRenameResults";
             this.lbRenameResults.Size = new System.Drawing.Size(204, 329);
-            this.lbRenameResults.TabIndex = 1;
+            this.lbRenameResults.TabIndex = 8;
+            this.lbRenameResults.TabStop = false;
             // 
             // txtFolderPath
             // 
@@ -78,7 +80,7 @@
             this.btnRename.Location = new System.Drawing.Point(276, 94);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(75, 23);
-            this.btnRename.TabIndex = 5;
+            this.btnRename.TabIndex = 1;
             this.btnRename.Text = "Rename";
             this.btnRename.UseVisualStyleBackColor = true;
             this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
@@ -89,7 +91,8 @@
             this.lbFileList.Location = new System.Drawing.Point(37, 94);
             this.lbFileList.Name = "lbFileList";
             this.lbFileList.Size = new System.Drawing.Size(204, 329);
-            this.lbFileList.TabIndex = 6;
+            this.lbFileList.TabIndex = 9;
+            this.lbFileList.TabStop = false;
             // 
             // lblFilesList
             // 
@@ -105,26 +108,38 @@
             this.btnSelect.Location = new System.Drawing.Point(510, 39);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
-            this.btnSelect.TabIndex = 8;
+            this.btnSelect.TabIndex = 0;
             this.btnSelect.Text = "Select";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // btnCleanUp
             // 
-            this.btnCleanUp.Location = new System.Drawing.Point(276, 134);
+            this.btnCleanUp.Location = new System.Drawing.Point(276, 152);
             this.btnCleanUp.Name = "btnCleanUp";
             this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
-            this.btnCleanUp.TabIndex = 9;
+            this.btnCleanUp.TabIndex = 2;
             this.btnCleanUp.Text = "Clean Up";
             this.btnCleanUp.UseVisualStyleBackColor = true;
             this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
             // 
+            // btnCloseAll
+            // 
+            this.btnCloseAll.Location = new System.Drawing.Point(276, 123);
+            this.btnCloseAll.Name = "btnCloseAll";
+            this.btnCloseAll.Size = new System.Drawing.Size(75, 23);
+            this.btnCloseAll.TabIndex = 2;
+            this.btnCloseAll.Text = "Close All";
+            this.btnCloseAll.UseVisualStyleBackColor = true;
+            this.btnCloseAll.Click += new System.EventHandler(this.btnCloseAll_Click);
+            // 
             // frmMain
             // 
+            this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 445);
+            this.Controls.Add(this.btnCloseAll);
             this.Controls.Add(this.btnCleanUp);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lblFilesList);
@@ -135,7 +150,7 @@
             this.Controls.Add(this.txtFolderPath);
             this.Controls.Add(this.lbRenameResults);
             this.Name = "frmMain";
-            this.Text = "a";
+            this.Text = "Word File Renamer";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +167,7 @@
         private System.Windows.Forms.Label lblFilesList;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnCleanUp;
+        private System.Windows.Forms.Button btnCloseAll;
     }
 }
 

@@ -21,6 +21,6 @@ namespace MSWordFileRenamer
             return _DisplayName;
         }
 
-        public string FullFileName { get; set; }
+        public string FullFileName { get;}
     }
 }

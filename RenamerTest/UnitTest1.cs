@@ -16,7 +16,7 @@ namespace RenamerTest
             string FolderPath = "C:\\RenamerTests\\StaticFiles";
 
             //action
-            List<string> FileList = fileRenamer.GetFileList(FolderPath);
+            List<WordFile> FileList = fileRenamer.GetFileList(FolderPath);
 
             //assert
             int fileCount = 4;

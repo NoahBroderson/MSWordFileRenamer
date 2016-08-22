@@ -9,38 +9,33 @@ namespace MSWordFileRenamer
 
     public class Renamer
     {
-        public  string GetRenameResults(string fileToRename)
-        {
-            var filesToRename = new List<string>{fileToRename};
-            return GetRenameResults(filesToRename)[0];
-        }
+        public Application Word { get; set; }
 
-        public List<string> GetRenameResults(List<string> filesToRename)
+        public List<WordFile> GetRenameResults(List<WordFile> filesToRename)
         {
-            List<string> SavedAsFiles = new List<string>();
+            var SavedAsFiles = new List<WordFile>();
 
-            Application Word = new Application();
+            Word = new Application();
             Word.Visible = true;
 
-            foreach (string file in filesToRename)
+            foreach (WordFile file in filesToRename)
             {
                 //Word.Documents
-                Document Document = Word.Documents.Open(file);
+                Document Document = Word.Documents.Open(file.FullFileName);
             }
 
-            foreach (string file in filesToRename)
+            foreach (WordFile file in filesToRename)
             {
                 try
                 {
-                    Document CurrentDocument = Word.Documents[file];
-                    string SavedAsName = file.Replace(".", "_z.");
+                    Document CurrentDocument = Word.Documents[file.FullFileName];
+                    string SavedAsName = file.FullFileName.Replace(".", "_z.");
                     CurrentDocument.SaveAs(SavedAsName);
-                    SavedAsFiles.Add(SavedAsName);
+                    SavedAsFiles.Add(new WordFile(SavedAsName));
                     //CurrentDocument.Close(false);
                 }
                 catch (Exception error)
                 {
-
                     throw error;
                 }
             }
@@ -48,7 +43,7 @@ namespace MSWordFileRenamer
             return SavedAsFiles;
         }
 
-        public List<string> GetFileList(string folderToProcess)
+        public List<WordFile> GetFileList(string folderToProcess)
         {
             //testing only
             //folderToProcess = "C:\\RenamerTests\\StaticFiles";
@@ -58,8 +53,13 @@ namespace MSWordFileRenamer
                 try
                 {
                     List<string> fileList = new List<string>(Directory.GetFiles(folderToProcess));
+                    var WordFileList = new List<WordFile>();
 
-                    return fileList;
+                    foreach (var file in fileList)
+                    {
+                        WordFileList.Add(new WordFile(file));
+                    }
+                    return WordFileList;
                 }
                 catch (Exception)
                 {
@@ -70,6 +70,26 @@ namespace MSWordFileRenamer
             {
                 throw new Exception("Folder Not Found!");
             }
+        }
+
+        public void CleanupFolder(List<WordFile> fileList)
+        {
+            foreach (WordFile file in fileList)
+            {
+                if (file.FullFileName.IndexOf("_z") != -1)
+                {
+                    System.IO.File.Delete(file.FullFileName);
+                }
+            }
+        }
+
+        public void CloseWordDocs(List<WordFile> renamedFiles)
+        {
+            foreach (WordFile fileToClose in renamedFiles)
+            {
+                Word.Documents[fileToClose.FullFileName].Close();
+            }
+            Word.Quit();
         }
     }
 }

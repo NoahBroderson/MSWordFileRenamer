@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace MSWordFileRenamer
 {
-
+    //todo - Clean up code, add error handling
     public class Renamer
     {
         public Application Word { get; set; }
@@ -43,7 +43,7 @@ namespace MSWordFileRenamer
                 }
                 catch (Exception error)
                 {
-                    throw new Exception("Error renaming Word files", error);
+                    throw new Exception("Error renaming Word documents", error);
                 }
             }
             
@@ -59,26 +59,26 @@ namespace MSWordFileRenamer
             {
                 try
                 {
-                    List<string> fileList = new List<string>(Directory.GetFiles(folderToProcess,"*.doc"));
+                    List<string> fileList = new List<string>(Directory.GetFiles(folderToProcess, "*.doc"));
                     var WordFileList = new List<WordFile>();
 
                     foreach (var file in fileList)
                     {
                         if (!file.ToString().Contains("~"))
                         {
-                        WordFileList.Add(new WordFile(file));
+                            WordFileList.Add(new WordFile(file));
                         }
                     }
                     return WordFileList;
                 }
-                catch (Exception)
+                catch (Exception error)
                 {
-                    throw;
+                    throw new Exception("Error getting list of Word files to process", error);
                 }
             }
             else
             {
-                throw new Exception("Folder Not Found!");
+                throw new Exception("Source folder Not Found!");
             }
         }
 
@@ -96,7 +96,7 @@ namespace MSWordFileRenamer
             }
             catch (Exception error)
             {
-                
+                throw new Exception("Error deleting renamed files", error);
             }
         }
 
@@ -112,6 +112,7 @@ namespace MSWordFileRenamer
             }
             catch (Exception error)
             {
+                throw new Exception("Error closing open Word documents", error);
             }
         }
     }

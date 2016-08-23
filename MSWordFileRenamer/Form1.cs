@@ -20,9 +20,9 @@ namespace MSWordFileRenamer
         public frmMain()
         {
             InitializeComponent();
-            Renamer FileRenamer = new Renamer();
+            //todo - remove
+            //Renamer FileRenamer = new Renamer();
         }
-
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -54,14 +54,13 @@ namespace MSWordFileRenamer
             renamedFiles = FileRenamer.GetRenameResults(filesToRename);
             DisplayRenamedFiles(renamedFiles);
             DisplaySourceFolderFiles();
-            
         }
 
-        public void DisplayResult(string renameResult)
-        {
-            lbRenameResults.Items.Add(renameResult);
-        }
-
+        //todo - remove
+        //public void DisplayResult(string renameResult)
+        //{
+        //    lbRenameResults.Items.Add(renameResult);
+        //}
 
         public void DisplayRenamedFiles(List<WordFile> renameResults)
         {

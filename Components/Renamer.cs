@@ -15,13 +15,20 @@ namespace MSWordFileRenamer
         {
             var SavedAsFiles = new List<WordFile>();
 
-            Word = new Application();
-            Word.Visible = true;
-
-            foreach (WordFile file in filesToRename)
+            try
             {
-                //Word.Documents
-                Document Document = Word.Documents.Open(file.FullFileName);
+                Word = new Application();
+                Word.Visible = true;
+
+                foreach (WordFile file in filesToRename)
+                {
+                    //Word.Documents
+                    Document Document = Word.Documents.Open(file.FullFileName);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception("Error opening Word documents", error);
             }
 
             foreach (WordFile file in filesToRename)
@@ -36,7 +43,7 @@ namespace MSWordFileRenamer
                 }
                 catch (Exception error)
                 {
-                    throw error;
+                    throw new Exception("Error renaming Word files", error);
                 }
             }
             

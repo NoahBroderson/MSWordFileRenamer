@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenamerTest", "RenamerTest\RenamerTest.csproj", "{6E458A5E-2AD6-4519-A59F-105F5478BC2F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WordFileRenamer", "WordFileRenamer\WordFileRenamer.vdproj", "{51725481-CADB-477D-81B1-388F9080D095}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,14 @@ Global
 		{6E458A5E-2AD6-4519-A59F-105F5478BC2F}.Release|x64.Build.0 = Release|Any CPU
 		{6E458A5E-2AD6-4519-A59F-105F5478BC2F}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E458A5E-2AD6-4519-A59F-105F5478BC2F}.Release|x86.Build.0 = Release|Any CPU
+		{51725481-CADB-477D-81B1-388F9080D095}.Debug|Any CPU.ActiveCfg = Debug
+		{51725481-CADB-477D-81B1-388F9080D095}.Debug|ARM.ActiveCfg = Debug
+		{51725481-CADB-477D-81B1-388F9080D095}.Debug|x64.ActiveCfg = Debug
+		{51725481-CADB-477D-81B1-388F9080D095}.Debug|x86.ActiveCfg = Debug
+		{51725481-CADB-477D-81B1-388F9080D095}.Release|Any CPU.ActiveCfg = Release
+		{51725481-CADB-477D-81B1-388F9080D095}.Release|ARM.ActiveCfg = Release
+		{51725481-CADB-477D-81B1-388F9080D095}.Release|x64.ActiveCfg = Release
+		{51725481-CADB-477D-81B1-388F9080D095}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

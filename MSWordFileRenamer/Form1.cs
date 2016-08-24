@@ -24,35 +24,64 @@ namespace MSWordFileRenamer
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
-            folderBrowser.SelectedPath = txtFolderPath.Text;
-            DialogResult result = folderBrowser.ShowDialog();
-
-            if (!string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+            try
             {
-                txtFolderPath.Text = folderBrowser.SelectedPath;
-            }
+                string FolderToProcess = "";
+                FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+                folderBrowser.SelectedPath = txtFolderPath.Text;
+                DialogResult result = folderBrowser.ShowDialog();
 
-            DisplaySourceFolderFiles();
+                if (string.IsNullOrWhiteSpace(folderBrowser.SelectedPath))
+                {
+                    FolderToProcess = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                }
+                else
+                {
+                    FolderToProcess = folderBrowser.SelectedPath;
+                }
+
+                txtFolderPath.Text = FolderToProcess;
+                DisplaySourceFolderFiles(txtFolderPath.Text);
+                btnRename.Focus();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
-        private void DisplaySourceFolderFiles()
+        private void DisplaySourceFolderFiles(string folderToProcess)
         {
-            lbFileList.Items.Clear();
-            string folderToProcess = txtFolderPath.Text;
-            filesToRename = FileRenamer.GetFileList(folderToProcess);
-            foreach (WordFile name in filesToRename)
+            try
             {
-                lbFileList.Items.Add(name);
+                lbFileList.Items.Clear();
+                filesToRename = FileRenamer.GetFileList(folderToProcess);
+
+                foreach (WordFile name in filesToRename)
+                {
+                    lbFileList.Items.Add(name);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
             }
         }
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            renamedFiles = FileRenamer.GetRenameResults(filesToRename);
-            DisplayRenamedFiles(renamedFiles);
-            DisplaySourceFolderFiles();
-            MessageBox.Show("Rename Complete!");
+            try
+            {
+                renamedFiles = FileRenamer.GetRenameResults(filesToRename);
+                DisplayRenamedFiles(renamedFiles);
+                DisplaySourceFolderFiles(txtFolderPath.Text);
+                MessageBox.Show("Rename Complete!");
+                btnCloseAll.Focus();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         public void DisplayRenamedFiles(List<WordFile> renameResults)
@@ -65,18 +94,34 @@ namespace MSWordFileRenamer
 
         private void btnCleanUp_Click(object sender, EventArgs e)
         {
-            var FilesToCleanup = FileRenamer.GetFileList(txtFolderPath.Text);
-            FileRenamer.CleanupFolder(filesToRename);
-            DisplaySourceFolderFiles();
+            try
+            {
+                var FilesToCleanup = FileRenamer.GetFileList(txtFolderPath.Text);
+                FileRenamer.CleanupFolder(filesToRename);
+                DisplaySourceFolderFiles(txtFolderPath.Text);
+                btnRename.Focus();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
 
         private void btnCloseAll_Click(object sender, EventArgs e)
         {
-            FileRenamer.CloseWordDocs(renamedFiles);
-            FileRenamer.CleanupFolder(renamedFiles);
-            DisplaySourceFolderFiles();
-            renamedFiles.Clear();
-            lbRenameResults.Items.Clear();
+            try
+            {
+                FileRenamer.CloseWordDocs(renamedFiles);
+                FileRenamer.CleanupFolder(renamedFiles);
+                DisplaySourceFolderFiles(txtFolderPath.Text);
+                renamedFiles.Clear();
+                lbRenameResults.Items.Clear();
+                btnRename.Focus();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
         }
     }
 }

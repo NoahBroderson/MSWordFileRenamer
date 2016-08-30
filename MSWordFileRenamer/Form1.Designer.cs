@@ -55,7 +55,6 @@
             this.txtFolderPath.Name = "txtFolderPath";
             this.txtFolderPath.Size = new System.Drawing.Size(467, 20);
             this.txtFolderPath.TabIndex = 2;
-            this.txtFolderPath.Text = "C:\\RenamerTests\\StaticFiles";
             // 
             // lblFolderPath
             // 
@@ -151,6 +150,7 @@
             this.Controls.Add(this.lbRenameResults);
             this.Name = "frmMain";
             this.Text = "Word File Renamer";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

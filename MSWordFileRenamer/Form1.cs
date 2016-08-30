@@ -13,6 +13,8 @@ namespace MSWordFileRenamer
 {
     public partial class frmMain : Form
     {
+        //TODO: SAVE LAST SELECTED FOLDER TO CONFIG FILE
+        //TODO: LOG FILE RENAMES TO TEXT FILE OR DB WITH TIMES
         Renamer FileRenamer = new Renamer();
         List<WordFile> filesToRename = null;
         List<WordFile> renamedFiles = null;
@@ -38,6 +40,8 @@ namespace MSWordFileRenamer
                 else
                 {
                     FolderToProcess = folderBrowser.SelectedPath;
+                    Properties.Settings.Default.FolderToProcess = FolderToProcess;
+                    Properties.Settings.Default.Save();
                 }
 
                 txtFolderPath.Text = FolderToProcess;
@@ -122,6 +126,11 @@ namespace MSWordFileRenamer
             {
                 MessageBox.Show(error.Message);
             }
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            txtFolderPath.Text = Properties.Settings.Default.FolderToProcess;
         }
     }
 }

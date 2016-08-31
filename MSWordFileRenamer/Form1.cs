@@ -13,11 +13,11 @@ namespace MSWordFileRenamer
 {
     public partial class frmMain : Form
     {
-        //TODO: SAVE LAST SELECTED FOLDER TO CONFIG FILE
         //TODO: LOG FILE RENAMES TO TEXT FILE OR DB WITH TIMES
-        Renamer FileRenamer = new Renamer();
+        Renamer FileRenamer;
         List<WordFile> filesToRename = null;
         List<WordFile> renamedFiles = null;
+        Logger LogFile = new Logger();
 
         public frmMain()
         {
@@ -45,6 +45,7 @@ namespace MSWordFileRenamer
                 }
 
                 txtFolderPath.Text = FolderToProcess;
+                LogFile.LogFolder = txtFolderPath.Text;
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 btnRename.Focus();
             }
@@ -54,13 +55,22 @@ namespace MSWordFileRenamer
             }
         }
 
+        public void OnRenamed(object sender, RenamerEventArgs args)
+        {
+            string RenameResult = string.Format("File Renamed - {0}:    {1}", args.File, args.ElapsedTime);
+            lbRenameResults.Items.Add(RenameResult);
+            LogFile.WriteEntry(RenameResult);
+        }
+
         private void DisplaySourceFolderFiles(string folderToProcess)
         {
             try
             {
                 lbFileList.Items.Clear();
-                filesToRename = FileRenamer.GetFileList(folderToProcess);
-
+                //lbRenameResults.Items.Clear();
+                FileRenamer = new Renamer(folderToProcess);
+                filesToRename = FileRenamer.GetFileList();
+                
                 foreach (WordFile name in filesToRename)
                 {
                     lbFileList.Items.Add(name);
@@ -72,12 +82,15 @@ namespace MSWordFileRenamer
             }
         }
 
+
         private void btnRename_Click(object sender, EventArgs e)
         {
             try
             {
-                renamedFiles = FileRenamer.GetRenameResults(filesToRename);
-                DisplayRenamedFiles(renamedFiles);
+                LogFile.WriteTestHeader();
+                FileRenamer.FileRenamed += OnRenamed;
+                FileRenamer.RenameFiles(filesToRename);
+                //DisplayRenamedFiles(renamedFiles);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 MessageBox.Show("Rename Complete!");
                 btnCloseAll.Focus();
@@ -100,7 +113,7 @@ namespace MSWordFileRenamer
         {
             try
             {
-                var FilesToCleanup = FileRenamer.GetFileList(txtFolderPath.Text);
+                var FilesToCleanup = FileRenamer.GetFileList();
                 FileRenamer.CleanupFolder(filesToRename);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 btnRename.Focus();

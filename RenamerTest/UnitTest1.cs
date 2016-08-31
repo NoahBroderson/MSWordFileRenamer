@@ -12,11 +12,10 @@ namespace RenamerTest
         public void GetFileList()
         {
             //setup
-            MSWordFileRenamer.Renamer fileRenamer = new MSWordFileRenamer.Renamer();
-            string FolderPath = "C:\\RenamerTests\\StaticFiles";
+            MSWordFileRenamer.Renamer fileRenamer = new MSWordFileRenamer.Renamer("C:\\RenamerTests\\StaticFiles");
 
             //action
-            List<WordFile> FileList = fileRenamer.GetFileList(FolderPath);
+            List<WordFile> FileList = fileRenamer.GetFileList();
 
             //assert
             int fileCount = 4;

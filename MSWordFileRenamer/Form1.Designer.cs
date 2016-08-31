@@ -38,14 +38,15 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnCleanUp = new System.Windows.Forms.Button();
             this.btnCloseAll = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbRenameResults
             // 
             this.lbRenameResults.FormattingEnabled = true;
-            this.lbRenameResults.Location = new System.Drawing.Point(381, 94);
+            this.lbRenameResults.Location = new System.Drawing.Point(404, 149);
             this.lbRenameResults.Name = "lbRenameResults";
-            this.lbRenameResults.Size = new System.Drawing.Size(204, 329);
+            this.lbRenameResults.Size = new System.Drawing.Size(293, 329);
             this.lbRenameResults.TabIndex = 8;
             this.lbRenameResults.TabStop = false;
             // 
@@ -68,7 +69,7 @@
             // lblRenameResults
             // 
             this.lblRenameResults.AutoSize = true;
-            this.lblRenameResults.Location = new System.Drawing.Point(378, 78);
+            this.lblRenameResults.Location = new System.Drawing.Point(401, 133);
             this.lblRenameResults.Name = "lblRenameResults";
             this.lblRenameResults.Size = new System.Drawing.Size(88, 13);
             this.lblRenameResults.TabIndex = 4;
@@ -76,7 +77,7 @@
             // 
             // btnRename
             // 
-            this.btnRename.Location = new System.Drawing.Point(276, 94);
+            this.btnRename.Location = new System.Drawing.Point(276, 149);
             this.btnRename.Name = "btnRename";
             this.btnRename.Size = new System.Drawing.Size(75, 23);
             this.btnRename.TabIndex = 1;
@@ -87,7 +88,7 @@
             // lbFileList
             // 
             this.lbFileList.FormattingEnabled = true;
-            this.lbFileList.Location = new System.Drawing.Point(37, 94);
+            this.lbFileList.Location = new System.Drawing.Point(37, 149);
             this.lbFileList.Name = "lbFileList";
             this.lbFileList.Size = new System.Drawing.Size(204, 329);
             this.lbFileList.TabIndex = 9;
@@ -96,7 +97,7 @@
             // lblFilesList
             // 
             this.lblFilesList.AutoSize = true;
-            this.lblFilesList.Location = new System.Drawing.Point(34, 78);
+            this.lblFilesList.Location = new System.Drawing.Point(34, 133);
             this.lblFilesList.Name = "lblFilesList";
             this.lblFilesList.Size = new System.Drawing.Size(42, 13);
             this.lblFilesList.TabIndex = 7;
@@ -114,7 +115,7 @@
             // 
             // btnCleanUp
             // 
-            this.btnCleanUp.Location = new System.Drawing.Point(276, 152);
+            this.btnCleanUp.Location = new System.Drawing.Point(276, 207);
             this.btnCleanUp.Name = "btnCleanUp";
             this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
             this.btnCleanUp.TabIndex = 2;
@@ -124,7 +125,7 @@
             // 
             // btnCloseAll
             // 
-            this.btnCloseAll.Location = new System.Drawing.Point(276, 123);
+            this.btnCloseAll.Location = new System.Drawing.Point(276, 178);
             this.btnCloseAll.Name = "btnCloseAll";
             this.btnCloseAll.Size = new System.Drawing.Size(75, 23);
             this.btnCloseAll.TabIndex = 2;
@@ -132,12 +133,22 @@
             this.btnCloseAll.UseVisualStyleBackColor = true;
             this.btnCloseAll.Click += new System.EventHandler(this.btnCloseAll_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(276, 236);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Clean Up";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 445);
+            this.ClientSize = new System.Drawing.Size(835, 506);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCloseAll);
             this.Controls.Add(this.btnCleanUp);
             this.Controls.Add(this.btnSelect);
@@ -168,6 +179,7 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnCleanUp;
         private System.Windows.Forms.Button btnCloseAll;
+        private System.Windows.Forms.Button button1;
     }
 }
 

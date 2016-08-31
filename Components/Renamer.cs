@@ -13,7 +13,7 @@ namespace MSWordFileRenamer
         public List<WordFile> GetRenameResults(List<WordFile> filesToRename)
         {
             var SavedAsFiles = new List<WordFile>();
-
+            var test = "test";
             try
             {
                 Word = new Application();

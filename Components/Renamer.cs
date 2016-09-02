@@ -18,7 +18,7 @@ namespace MSWordFileRenamer
         public Application Word { get; set; }
 
         public event EventHandler<RenamerEventArgs> FileRenamed;
-        public event EventHandler<RenamerEventArgs> FileOpened;
+        //public event EventHandler<RenamerEventArgs> FileOpened;
 
         public void RenameFiles(List<WordFile> filesToRename)
         {
@@ -51,7 +51,10 @@ namespace MSWordFileRenamer
             {
                 try
                 {
-                    RenameFile(file);
+                    if (file.ToString().IndexOf("_z") == -1)
+                    {
+                        RenameFile(file);
+                    }
                 }
                 catch (Exception error)
                 {
@@ -128,7 +131,7 @@ namespace MSWordFileRenamer
             }
             catch (Exception error)
             {
-                throw new Exception("Error deleting renamed files", error);
+                throw new Exception("Error deleting renamed files, are all Word documents closed?", error);
             }
         }
 
@@ -136,9 +139,9 @@ namespace MSWordFileRenamer
         {
             try
             {
-                foreach (WordFile fileToClose in renamedFiles)
+                for (int i = 1; i == this.Word.Documents.Count; i++)
                 {
-                    Word.Documents[fileToClose.FullFileName].Close();
+                    Word.Documents[i].Close();
                 }
                 Word.Quit();
             }

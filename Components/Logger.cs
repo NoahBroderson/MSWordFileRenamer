@@ -11,6 +11,14 @@ namespace MSWordFileRenamer
         private string MachineName = Environment.MachineName;
 
         public string LogFolder { get; set; }
+        public string FullName
+        {
+            get
+            {
+                return System.IO.Path.Combine(LogFolder, Environment.MachineName + ".txt");
+            }
+        }
+
 
         public Logger()
         {
@@ -31,6 +39,7 @@ namespace MSWordFileRenamer
                     Writer.WriteLine(" ");
                     Writer.WriteLine("**************************");
                     Writer.WriteLine("Test started on Machine: {0}", MachineName);
+                    Writer.WriteLine("Source folder: {0}", LogFolder);
                     Writer.WriteLine(DateTime.Now);
                     Writer.WriteLine("**************************");
                 }

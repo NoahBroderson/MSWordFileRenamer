@@ -46,6 +46,8 @@ namespace MSWordFileRenamer
 
                 txtFolderPath.Text = FolderToProcess;
                 LogFile.LogFolder = txtFolderPath.Text;
+                FileRenamer = new Renamer(FolderToProcess);
+                FileRenamer.FileRenamed += OnRenamed;
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 btnRename.Focus();
             }
@@ -68,7 +70,7 @@ namespace MSWordFileRenamer
             {
                 lbFileList.Items.Clear();
                 //lbRenameResults.Items.Clear();
-                FileRenamer = new Renamer(folderToProcess);
+                //FileRenamer = new Renamer(folderToProcess);
                 filesToRename = FileRenamer.GetFileList();
                 
                 foreach (WordFile name in filesToRename)
@@ -88,12 +90,12 @@ namespace MSWordFileRenamer
             try
             {
                 LogFile.WriteTestHeader();
-                FileRenamer.FileRenamed += OnRenamed;
+                
                 FileRenamer.RenameFiles(filesToRename);
                 //DisplayRenamedFiles(renamedFiles);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 MessageBox.Show("Rename Complete!");
-                btnCloseAll.Focus();
+                //btnCloseAll.Focus();
             }
             catch (Exception error)
             {
@@ -129,7 +131,7 @@ namespace MSWordFileRenamer
             try
             {
                 FileRenamer.CloseWordDocs(renamedFiles);
-                FileRenamer.CleanupFolder(renamedFiles);
+               // FileRenamer.CleanupFolder(renamedFiles);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 renamedFiles.Clear();
                 lbRenameResults.Items.Clear();
@@ -144,6 +146,22 @@ namespace MSWordFileRenamer
         private void frmMain_Load(object sender, EventArgs e)
         {
             txtFolderPath.Text = Properties.Settings.Default.FolderToProcess;
+            LogFile.LogFolder = Properties.Settings.Default.FolderToProcess;
+
+        }
+
+        private void btnOpenLog_Click(object sender, EventArgs e)
+        {
+
+            if (System.IO.File.Exists(LogFile.FullName))
+            {
+                System.Diagnostics.Process.Start(System.IO.Path.Combine(LogFile.LogFolder, Environment.MachineName + ".txt"));
+            }
+            else
+            {
+                MessageBox.Show("Log file not available.");
+            }
+            
         }
     }
 }

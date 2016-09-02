@@ -37,8 +37,7 @@
             this.lblFilesList = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnCleanUp = new System.Windows.Forms.Button();
-            this.btnCloseAll = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpenLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbRenameResults
@@ -115,7 +114,7 @@
             // 
             // btnCleanUp
             // 
-            this.btnCleanUp.Location = new System.Drawing.Point(276, 207);
+            this.btnCleanUp.Location = new System.Drawing.Point(276, 178);
             this.btnCleanUp.Name = "btnCleanUp";
             this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
             this.btnCleanUp.TabIndex = 2;
@@ -123,24 +122,15 @@
             this.btnCleanUp.UseVisualStyleBackColor = true;
             this.btnCleanUp.Click += new System.EventHandler(this.btnCleanUp_Click);
             // 
-            // btnCloseAll
+            // btnOpenLog
             // 
-            this.btnCloseAll.Location = new System.Drawing.Point(276, 178);
-            this.btnCloseAll.Name = "btnCloseAll";
-            this.btnCloseAll.Size = new System.Drawing.Size(75, 23);
-            this.btnCloseAll.TabIndex = 2;
-            this.btnCloseAll.Text = "Close All";
-            this.btnCloseAll.UseVisualStyleBackColor = true;
-            this.btnCloseAll.Click += new System.EventHandler(this.btnCloseAll_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(276, 236);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Clean Up";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOpenLog.Location = new System.Drawing.Point(276, 207);
+            this.btnOpenLog.Name = "btnOpenLog";
+            this.btnOpenLog.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenLog.TabIndex = 10;
+            this.btnOpenLog.Text = "Open Log";
+            this.btnOpenLog.UseVisualStyleBackColor = true;
+            this.btnOpenLog.Click += new System.EventHandler(this.btnOpenLog_Click);
             // 
             // frmMain
             // 
@@ -148,8 +138,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 506);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnCloseAll);
+            this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.btnCleanUp);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.lblFilesList);
@@ -178,8 +167,7 @@
         private System.Windows.Forms.Label lblFilesList;
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnCleanUp;
-        private System.Windows.Forms.Button btnCloseAll;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpenLog;
     }
 }
 

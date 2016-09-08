@@ -38,14 +38,19 @@
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnCleanUp = new System.Windows.Forms.Button();
             this.btnOpenLog = new System.Windows.Forms.Button();
+            this.btnNewTest = new System.Windows.Forms.Button();
+            this.txtTestDesc = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkCloseAfter = new System.Windows.Forms.CheckBox();
+            this.chkRename = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbRenameResults
             // 
             this.lbRenameResults.FormattingEnabled = true;
-            this.lbRenameResults.Location = new System.Drawing.Point(404, 149);
+            this.lbRenameResults.Location = new System.Drawing.Point(430, 149);
             this.lbRenameResults.Name = "lbRenameResults";
-            this.lbRenameResults.Size = new System.Drawing.Size(293, 329);
+            this.lbRenameResults.Size = new System.Drawing.Size(495, 329);
             this.lbRenameResults.TabIndex = 8;
             this.lbRenameResults.TabStop = false;
             // 
@@ -78,9 +83,9 @@
             // 
             this.btnRename.Location = new System.Drawing.Point(276, 149);
             this.btnRename.Name = "btnRename";
-            this.btnRename.Size = new System.Drawing.Size(75, 23);
+            this.btnRename.Size = new System.Drawing.Size(103, 23);
             this.btnRename.TabIndex = 1;
-            this.btnRename.Text = "Rename";
+            this.btnRename.Text = "Process Files";
             this.btnRename.UseVisualStyleBackColor = true;
             this.btnRename.Click += new System.EventHandler(this.btnRename_Click);
             // 
@@ -114,7 +119,7 @@
             // 
             // btnCleanUp
             // 
-            this.btnCleanUp.Location = new System.Drawing.Point(276, 178);
+            this.btnCleanUp.Location = new System.Drawing.Point(276, 424);
             this.btnCleanUp.Name = "btnCleanUp";
             this.btnCleanUp.Size = new System.Drawing.Size(75, 23);
             this.btnCleanUp.TabIndex = 2;
@@ -124,7 +129,7 @@
             // 
             // btnOpenLog
             // 
-            this.btnOpenLog.Location = new System.Drawing.Point(276, 207);
+            this.btnOpenLog.Location = new System.Drawing.Point(276, 453);
             this.btnOpenLog.Name = "btnOpenLog";
             this.btnOpenLog.Size = new System.Drawing.Size(75, 23);
             this.btnOpenLog.TabIndex = 10;
@@ -132,12 +137,63 @@
             this.btnOpenLog.UseVisualStyleBackColor = true;
             this.btnOpenLog.Click += new System.EventHandler(this.btnOpenLog_Click);
             // 
+            // btnNewTest
+            // 
+            this.btnNewTest.Location = new System.Drawing.Point(510, 90);
+            this.btnNewTest.Name = "btnNewTest";
+            this.btnNewTest.Size = new System.Drawing.Size(75, 23);
+            this.btnNewTest.TabIndex = 11;
+            this.btnNewTest.Text = "New Test";
+            this.btnNewTest.UseVisualStyleBackColor = true;
+            this.btnNewTest.Click += new System.EventHandler(this.btnNewTest_Click);
+            // 
+            // txtTestDesc
+            // 
+            this.txtTestDesc.Location = new System.Drawing.Point(37, 90);
+            this.txtTestDesc.Name = "txtTestDesc";
+            this.txtTestDesc.Size = new System.Drawing.Size(467, 20);
+            this.txtTestDesc.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Test Description:";
+            // 
+            // chkCloseAfter
+            // 
+            this.chkCloseAfter.AutoSize = true;
+            this.chkCloseAfter.Location = new System.Drawing.Point(276, 201);
+            this.chkCloseAfter.Name = "chkCloseAfter";
+            this.chkCloseAfter.Size = new System.Drawing.Size(52, 17);
+            this.chkCloseAfter.TabIndex = 15;
+            this.chkCloseAfter.Text = "Close";
+            this.chkCloseAfter.UseVisualStyleBackColor = true;
+            // 
+            // chkRename
+            // 
+            this.chkRename.AutoSize = true;
+            this.chkRename.Location = new System.Drawing.Point(276, 178);
+            this.chkRename.Name = "chkRename";
+            this.chkRename.Size = new System.Drawing.Size(66, 17);
+            this.chkRename.TabIndex = 16;
+            this.chkRename.Text = "Rename";
+            this.chkRename.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 506);
+            this.ClientSize = new System.Drawing.Size(993, 506);
+            this.Controls.Add(this.chkRename);
+            this.Controls.Add(this.chkCloseAfter);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtTestDesc);
+            this.Controls.Add(this.btnNewTest);
             this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.btnCleanUp);
             this.Controls.Add(this.btnSelect);
@@ -168,6 +224,11 @@
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.Button btnCleanUp;
         private System.Windows.Forms.Button btnOpenLog;
+        private System.Windows.Forms.Button btnNewTest;
+        private System.Windows.Forms.TextBox txtTestDesc;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkCloseAfter;
+        private System.Windows.Forms.CheckBox chkRename;
     }
 }
 

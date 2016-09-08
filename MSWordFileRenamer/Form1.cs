@@ -13,15 +13,20 @@ namespace MSWordFileRenamer
 {
     public partial class frmMain : Form
     {
-        //TODO: LOG FILE RENAMES TO TEXT FILE OR DB WITH TIMES
+        //TODO: ReWrite with better object model, Know/Decide/Do + more events
+        //ToDo: Add choice of close after rename
+        //ToDo: Add choice to open without rename
+        //ToDo: Add Results prompt to append to log after test
+
         Renamer FileRenamer;
         List<WordFile> filesToRename = null;
         List<WordFile> renamedFiles = null;
-        Logger LogFile = new Logger();
+        Logger LogFile;
 
         public frmMain()
         {
             InitializeComponent();
+            ControlsEnabled(false);
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -45,11 +50,13 @@ namespace MSWordFileRenamer
                 }
 
                 txtFolderPath.Text = FolderToProcess;
-                LogFile.LogFolder = txtFolderPath.Text;
                 FileRenamer = new Renamer(FolderToProcess);
                 FileRenamer.FileRenamed += OnRenamed;
+                FileRenamer.FileProcessed += OnFileProcessed;
                 DisplaySourceFolderFiles(txtFolderPath.Text);
-                btnRename.Focus();
+                ControlsEnabled(false);
+                btnNewTest.Enabled = true;
+                btnNewTest.Focus();
             }
             catch (Exception error)
             {
@@ -62,6 +69,13 @@ namespace MSWordFileRenamer
             string RenameResult = string.Format("File Renamed - {0}:    {1}", args.File, args.ElapsedTime);
             lbRenameResults.Items.Add(RenameResult);
             LogFile.WriteEntry(RenameResult);
+        }
+
+        public void OnFileProcessed(object sender, RenamerEventArgs args)
+        {
+            string ProcessResult = string.Format("File {0} {1}: {2}", args.File, args.ActionTaken, args.ElapsedTime);
+            lbRenameResults.Items.Add(ProcessResult);
+            LogFile.WriteEntry(ProcessResult);
         }
 
         private void DisplaySourceFolderFiles(string folderToProcess)
@@ -89,12 +103,15 @@ namespace MSWordFileRenamer
         {
             try
             {
-                LogFile.WriteTestHeader();
-                
-                FileRenamer.RenameFiles(filesToRename);
+
+
+                //FileRenamer.RenameFiles(filesToRename);
+                FileRenamer.ProcessFiles(filesToRename, chkRename.Checked, chkCloseAfter.Checked);
+
                 //DisplayRenamedFiles(renamedFiles);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
                 MessageBox.Show("Rename Complete!");
+                
                 //btnCloseAll.Focus();
             }
             catch (Exception error)
@@ -152,6 +169,10 @@ namespace MSWordFileRenamer
 
         private void btnOpenLog_Click(object sender, EventArgs e)
         {
+            if (LogFile == null)
+            {
+                LogFile = new Logger(txtFolderPath.Text);
+            }
 
             if (System.IO.File.Exists(LogFile.FullName))
             {
@@ -162,6 +183,25 @@ namespace MSWordFileRenamer
                 MessageBox.Show("Log file not available.");
             }
             
+        }
+
+        private void btnNewTest_Click(object sender, EventArgs e)
+        {
+            LogFile = new Logger(txtFolderPath.Text);
+
+            LogFile.LogFolder = txtFolderPath.Text;
+            LogFile.WriteTestHeader(txtTestDesc.Text);
+            ControlsEnabled(true);
+        }
+
+        private void ControlsEnabled(bool YesNo)
+        {
+            
+            btnRename.Enabled = YesNo;
+            chkRename.Enabled = YesNo;
+            chkCloseAfter.Enabled = YesNo;
+            btnNewTest.Enabled = YesNo;
+
         }
     }
 }

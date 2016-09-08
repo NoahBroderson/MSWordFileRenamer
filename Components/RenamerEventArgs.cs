@@ -9,6 +9,8 @@ namespace MSWordFileRenamer
     public class RenamerEventArgs : EventArgs
     {
         public MSWordFileRenamer.WordFile File { get; set; }
+        public string ActionTaken { get; set; }
         public TimeSpan ElapsedTime { get; set; }
+                
     }
 }

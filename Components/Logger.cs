@@ -30,7 +30,7 @@ namespace MSWordFileRenamer
             LogFolder = logFolder;
         }
 
-        public void WriteTestHeader()
+        public void WriteTestHeader(string testDescription)
         {
             if (System.IO.Directory.Exists(LogFolder))
             {
@@ -40,6 +40,7 @@ namespace MSWordFileRenamer
                     Writer.WriteLine("**************************");
                     Writer.WriteLine("Test started on Machine: {0}", MachineName);
                     Writer.WriteLine("Source folder: {0}", LogFolder);
+                    Writer.WriteLine("Test Description: {0}", testDescription);
                     Writer.WriteLine(DateTime.Now);
                     Writer.WriteLine("**************************");
                 }

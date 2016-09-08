@@ -10,6 +10,24 @@ namespace MSWordFileRenamer
     {
         private string _DisplayName;
         private string _FullFileName;
+        private string _NewName = "";
+
+        public string NewName
+        {
+            get
+            {
+                if (_NewName != "")
+                {
+                    return _DisplayName;
+                }
+                else
+                {
+                    return _NewName;
+                }
+            }
+            set { _NewName = value; }
+        }
+
 
         public WordFile(string fullFileName)
         {

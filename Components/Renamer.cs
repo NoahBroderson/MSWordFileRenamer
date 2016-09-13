@@ -104,6 +104,7 @@ namespace MSWordFileRenamer
                 {
                     Word.Quit();
                 }
+
             }
             catch (Exception error)
             {

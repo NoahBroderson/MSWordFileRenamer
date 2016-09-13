@@ -99,14 +99,17 @@ namespace MSWordFileRenamer
         }
 
 
-        private void btnRename_Click(object sender, EventArgs e)
+        private async void btnRename_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //ToDo - Handle events raised asynchronously by Renamer
+            //try
+            //{
                 ControlsEnabled(false);
                 lbRenameResults.Items.Add(txtTestDesc.Text);
                 //FileRenamer.RenameFiles(filesToRename);
-                FileRenamer.ProcessFiles(filesToRename, chkRename.Checked, chkSave.Checked, chkCloseAfter.Checked);
+                await Task.Run(()=>FileRenamer.ProcessFiles(filesToRename, chkRename.Checked, chkSave.Checked, chkCloseAfter.Checked));
+                
+                
 
                 //DisplayRenamedFiles(renamedFiles);
                 DisplaySourceFolderFiles(txtFolderPath.Text);
@@ -118,15 +121,15 @@ namespace MSWordFileRenamer
                 MessageBox.Show("Rename Complete!");
                 
                 //btnCloseAll.Focus();
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message);
-            }
-            finally
-            {
+            //}
+            //catch (Exception error)
+            //{
+            //    MessageBox.Show(error.Message);
+            //}
+            //finally
+            //{
                 btnNewTest.Enabled = true;
-            }
+            //}
         }
 
         public void DisplayRenamedFiles(List<WordFile> renameResults)

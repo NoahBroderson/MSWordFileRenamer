@@ -16,8 +16,7 @@ namespace MSWordFileRenamer
         }
 
         public Application Word { get; set; }
-
-        public event EventHandler<RenamerEventArgs> FileRenamed;
+                
         public event EventHandler<RenamerEventArgs> FileProcessed;
 
         public void RenameFiles(List<WordFile> filesToRename)
@@ -66,9 +65,10 @@ namespace MSWordFileRenamer
             }            
         }
 
-        public void ProcessFiles(List<WordFile> filesToRename, bool renameFile, bool closeFile)
+        public void ProcessFiles(List<WordFile> filesToRename, bool renameFile, bool saveFile, bool closeFile)
         {
-            var SavedAsFiles = new List<WordFile>();
+            //var SavedAsFiles = new List<WordFile>();
+            CleanupFolder(filesToRename);
 
             try
             {
@@ -81,33 +81,28 @@ namespace MSWordFileRenamer
 
                     if (file.ToString().IndexOf("_z") == -1)
                     {
-                        try
-                        {
                         Open(file);
-                        }
-                        catch (Exception error)
-                        {
-                            throw new Exception(string.Format("Error Opening file: {0}", file), error);
-                        }
 
                         if (renameFile)
                         {
-                            try
-                            {
-                                RenameFile(file);
-                            }
-                            catch (Exception error)
-                            {
-                                throw new Exception("Error renaming Word documents", error);
-                            }
+                            RenameFile(file);
+                        }
+
+                        if (saveFile)
+                        {
+                            EditAndSave(file);
                         }
 
                         if (closeFile)
                         {
                             CloseFile(file);
                         }
-                        
                     }
+                }
+
+                if (Word.Windows.Count == 0)
+                {
+                    Word.Quit();
                 }
             }
             catch (Exception error)
@@ -116,53 +111,101 @@ namespace MSWordFileRenamer
             }
         }
 
+        private void EditAndSave(WordFile file)
+        {
+            try
+            {
+                var Timer = new System.Diagnostics.Stopwatch();
+                Document currentDocument = Word.Documents[file.FullFileName];
+                currentDocument.Range(0, 0).Text = "NewText";
+                Timer.Start();
+                currentDocument.Save();
+                Timer.Stop();
+                
+                if (FileProcessed != null)
+                {
+                    var args = new RenamerEventArgs() { File = file, ElapsedTime = Timer.Elapsed, ActionTaken = "Saved" };
+                    FileProcessed(this, args);
+                }
+            }
+            catch (Exception error)
+            {
+                throw new Exception(string.Format("Error saving Word document: {0}", file), error);
+            }
+            
+        }
+
         private void CloseFile(WordFile file)
         {
-            var Timer = new System.Diagnostics.Stopwatch();
-            Document currentDocument = Word.Documents[file.FullFileName];
-            Timer.Start();
-            currentDocument.Close();
-            Timer.Stop();
-            var args = new RenamerEventArgs() { File = file, ElapsedTime = Timer.Elapsed, ActionTaken = "Closed" };
-            if (FileProcessed != null)
+            try
             {
-                FileProcessed(this, args);
+                var Timer = new System.Diagnostics.Stopwatch();
+                Document currentDocument = Word.Documents[file.FullFileName];
+                Timer.Start();
+                currentDocument.Close();
+                Timer.Stop();
+
+                if (FileProcessed != null)
+                {
+                    var args = new RenamerEventArgs() { File = file, ElapsedTime = Timer.Elapsed, ActionTaken = "Closed" };
+                    FileProcessed(this, args);
+                }
+                               
+            }
+            catch (Exception error)
+            {
+                throw new Exception(string.Format("Error closing document: {0}", file), error);
             }
         }
 
         private void Open(WordFile file)
         {
-            var Timer = new System.Diagnostics.Stopwatch();
-            Timer.Start();
-            Document Document = Word.Documents.Open(file.FullFileName);
-            Timer.Stop();
-            var args = new RenamerEventArgs() { File = file, ElapsedTime = Timer.Elapsed, ActionTaken = "Opened" };
-            if (FileProcessed != null)
+            try
             {
-                FileProcessed(this, args);
+                var Timer = new System.Diagnostics.Stopwatch();
+                Timer.Start();
+                Document Document = Word.Documents.Open(file.FullFileName);
+                Timer.Stop();
+                
+                if (FileProcessed != null)
+                {
+                    var args = new RenamerEventArgs() { File = file, ElapsedTime = Timer.Elapsed, ActionTaken = "Opened" };
+                    FileProcessed(this, args);
+                }
             }
+            catch (Exception error)
+            {
+                throw new Exception(string.Format("Error Opening file: {0}", file), error);
+            }
+            
         }
 
         private void RenameFile(WordFile file)
         {
-            var Timer = new System.Diagnostics.Stopwatch();
-            var ElapsedTime = new TimeSpan();
-            Document CurrentDocument = Word.Documents[file.FullFileName];
-            string SavedAsName = file.FullFileName.Replace(".", "_z.");
-            Timer.Start();
-            CurrentDocument.SaveAs(SavedAsName);
-            Timer.Stop();
-            ElapsedTime = Timer.Elapsed;
-            file.FullFileName = SavedAsName;
-
-            if (FileProcessed!= null)
+            try
             {
-                RenamerEventArgs args = new RenamerEventArgs();
-                args.File = file;
-                args.ActionTaken = "Renamed";
-                args.ElapsedTime = ElapsedTime;
-                FileProcessed(this, args);
+                var Timer = new System.Diagnostics.Stopwatch();                
+                Document CurrentDocument = Word.Documents[file.FullFileName];
+                string SavedAsName = file.FullFileName.Replace(".", "_z.");
+                Timer.Start();
+                CurrentDocument.SaveAs(SavedAsName);
+                Timer.Stop();                
+                file.FullFileName = SavedAsName;
+
+                if (FileProcessed != null)
+                {
+                    RenamerEventArgs args = new RenamerEventArgs();
+                    args.File = file;
+                    args.ActionTaken = "Renamed";
+                    args.ElapsedTime = Timer.Elapsed;
+                    FileProcessed(this, args);
+                }
             }
+            catch (Exception error)
+            {
+                throw new Exception("Error renaming Word documents", error);
+            }
+            
             //CurrentDocument.Close(false);
         }
 

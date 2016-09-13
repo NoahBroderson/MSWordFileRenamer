@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.chkCloseAfter = new System.Windows.Forms.CheckBox();
             this.chkRename = new System.Windows.Forms.CheckBox();
+            this.chkSave = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lbRenameResults
@@ -50,7 +51,7 @@
             this.lbRenameResults.FormattingEnabled = true;
             this.lbRenameResults.Location = new System.Drawing.Point(430, 149);
             this.lbRenameResults.Name = "lbRenameResults";
-            this.lbRenameResults.Size = new System.Drawing.Size(495, 329);
+            this.lbRenameResults.Size = new System.Drawing.Size(530, 329);
             this.lbRenameResults.TabIndex = 8;
             this.lbRenameResults.TabStop = false;
             // 
@@ -73,11 +74,11 @@
             // lblRenameResults
             // 
             this.lblRenameResults.AutoSize = true;
-            this.lblRenameResults.Location = new System.Drawing.Point(401, 133);
+            this.lblRenameResults.Location = new System.Drawing.Point(427, 133);
             this.lblRenameResults.Name = "lblRenameResults";
-            this.lblRenameResults.Size = new System.Drawing.Size(88, 13);
+            this.lblRenameResults.Size = new System.Drawing.Size(45, 13);
             this.lblRenameResults.TabIndex = 4;
-            this.lblRenameResults.Text = "Rename Results:";
+            this.lblRenameResults.Text = "Results:";
             // 
             // btnRename
             // 
@@ -142,7 +143,7 @@
             this.btnNewTest.Location = new System.Drawing.Point(510, 90);
             this.btnNewTest.Name = "btnNewTest";
             this.btnNewTest.Size = new System.Drawing.Size(75, 23);
-            this.btnNewTest.TabIndex = 11;
+            this.btnNewTest.TabIndex = 12;
             this.btnNewTest.Text = "New Test";
             this.btnNewTest.UseVisualStyleBackColor = true;
             this.btnNewTest.Click += new System.EventHandler(this.btnNewTest_Click);
@@ -152,7 +153,7 @@
             this.txtTestDesc.Location = new System.Drawing.Point(37, 90);
             this.txtTestDesc.Name = "txtTestDesc";
             this.txtTestDesc.Size = new System.Drawing.Size(467, 20);
-            this.txtTestDesc.TabIndex = 12;
+            this.txtTestDesc.TabIndex = 11;
             // 
             // label1
             // 
@@ -166,7 +167,7 @@
             // chkCloseAfter
             // 
             this.chkCloseAfter.AutoSize = true;
-            this.chkCloseAfter.Location = new System.Drawing.Point(276, 201);
+            this.chkCloseAfter.Location = new System.Drawing.Point(276, 224);
             this.chkCloseAfter.Name = "chkCloseAfter";
             this.chkCloseAfter.Size = new System.Drawing.Size(52, 17);
             this.chkCloseAfter.TabIndex = 15;
@@ -180,8 +181,18 @@
             this.chkRename.Name = "chkRename";
             this.chkRename.Size = new System.Drawing.Size(66, 17);
             this.chkRename.TabIndex = 16;
-            this.chkRename.Text = "Rename";
+            this.chkRename.Text = "Save As";
             this.chkRename.UseVisualStyleBackColor = true;
+            // 
+            // chkSave
+            // 
+            this.chkSave.AutoSize = true;
+            this.chkSave.Location = new System.Drawing.Point(276, 201);
+            this.chkSave.Name = "chkSave";
+            this.chkSave.Size = new System.Drawing.Size(93, 17);
+            this.chkSave.TabIndex = 17;
+            this.chkSave.Text = "Edit and Save";
+            this.chkSave.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -189,6 +200,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 506);
+            this.Controls.Add(this.chkSave);
             this.Controls.Add(this.chkRename);
             this.Controls.Add(this.chkCloseAfter);
             this.Controls.Add(this.label1);
@@ -205,7 +217,7 @@
             this.Controls.Add(this.txtFolderPath);
             this.Controls.Add(this.lbRenameResults);
             this.Name = "frmMain";
-            this.Text = "Word File Renamer";
+            this.Text = "Word File Tester";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -229,6 +241,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkCloseAfter;
         private System.Windows.Forms.CheckBox chkRename;
+        private System.Windows.Forms.CheckBox chkSave;
     }
 }
 
